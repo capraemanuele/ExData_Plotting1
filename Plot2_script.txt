@@ -1,0 +1,20 @@
+unzip("exdata_data_household_power_consumption.zip")
+
+library(dplyr)
+
+#read the file
+EPC_file<-read.csv("household_power_consumption.txt", sep=";", na.strings = "?")
+names(EPC_file)
+
+#convert Date as date
+EPC_file$Date=as.Date(EPC_file$Date, "%d/%m/%Y")
+
+# Subset the data
+EPC_subset <- subset(EPC_file, EPC_file$Date >= "2007-02-01" & EPC_file$Date <= " 2007-02-02")
+
+
+# Plot2
+plot(datetime,EPC_subset$Global_active_power,type="l", xlab="", ylab="Global Active Power (kilowatts)")
+dev.copy(png, file="plot 2.png", width=480, height=480)
+dev.off()
+
